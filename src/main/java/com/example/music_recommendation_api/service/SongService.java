@@ -30,8 +30,8 @@ public class SongService {
         return songRepository.findAll();
     }
 
-    public Song getSongById(long spotify_id){
-        return songRepository.findById(spotify_id).orElseThrow();
+    public Song getSongById(Integer songId){
+        return songRepository.findById(songId).orElseThrow();
     }
 
     public ArrayList<Song> getSongByGenre(int genre_id){

@@ -30,9 +30,9 @@ public class SongController {
         return songService.getAllSongs();
     }
 
-    @GetMapping("/{spotify_id}")
-    public Song getSongById(Long spotify_id){
-        return songService.getSongById(spotify_id);
+    @GetMapping("/{song_id}")
+    public Song getSongById(Integer song_id){
+        return songService.getSongById(song_id);
     }
 
     @GetMapping("/{genre_id}")

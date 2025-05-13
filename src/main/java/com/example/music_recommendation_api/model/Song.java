@@ -1,10 +1,16 @@
 package com.example.music_recommendation_api.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Song {
-    long spotify_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    String spotify_id;
     String track_name;
     int artist_id;
     int album_id;
@@ -19,11 +25,11 @@ public class Song {
 
 
 
-    public long getSpotify_id() {
+    public String getSpotify_id() {
         return spotify_id;
     }
 
-    public void setSpotify_id(int spotify_id) {
+    public void setSpotify_id(String spotify_id) {
         this.spotify_id = spotify_id;
     }
 
