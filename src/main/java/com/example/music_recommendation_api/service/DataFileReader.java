@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-@Service
 public class DataFileReader {
     private final Pattern regex;
     private final String filepath;
