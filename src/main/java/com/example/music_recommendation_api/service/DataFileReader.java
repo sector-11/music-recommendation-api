@@ -1,6 +1,7 @@
 package com.example.music_recommendation_api.service;
 
 import com.example.music_recommendation_api.model.FileRow;
+import com.example.music_recommendation_api.model.Song;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -72,5 +73,21 @@ public class DataFileReader {
         data.setTrackGenre(row[20]);
 
         return data;
+    }
+
+    private Song parseSong(FileRow row) {
+        Song song = new Song();
+
+        song.setSpotify_id(row.getTrackId());
+        song.setTrack_name(row.getTrackName());
+        song.setDuration(row.getDurationMs());
+        song.setExplicit(row.isExplicit());
+        song.setPopularity(row.getPopularity());
+        song.setTempo(row.getTempo());
+        song.setEnergy(row.getEnergy());
+        song.setDanceability(row.getDanceability());
+        song.setLoudness(row.getLoudness());
+
+        return song;
     }
 }
