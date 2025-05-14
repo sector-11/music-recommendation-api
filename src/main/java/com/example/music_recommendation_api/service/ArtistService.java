@@ -14,6 +14,14 @@ public class ArtistService {
         this.artistRepository = artistRepository;
     }
 
+    public Artist addArtist(Artist artist) {
+        return artistRepository.save(artist);
+    }
+
+    public Artist getArtistById(int id) {
+        return artistRepository.findById(id).orElseThrow();
+    }
+
     public List<Artist> getAllArtists() {
         return artistRepository.findAll();
     }

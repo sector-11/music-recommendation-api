@@ -14,6 +14,14 @@ public class AlbumService {
         this.albumRepository = albumRepository;
     }
 
+    public Album addAlbum(Album album) {
+        return albumRepository.save(album);
+    }
+
+    public Album getAlbumById(int id) {
+        return albumRepository.findById(id).orElseThrow();
+    }
+
     public List<Album> getAllArtists() {
         return albumRepository.findAll();
     }
