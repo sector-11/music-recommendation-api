@@ -2,9 +2,13 @@ package com.example.music_recommendation_api.service;
 
 import com.example.music_recommendation_api.model.Song;
 import com.example.music_recommendation_api.repository.SongRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,6 +32,12 @@ public class SongService {
     // get all songs
     public List<Song> getAllSongs(){
         return songRepository.findAll();
+    }
+
+    public List<Song> getSongsPaginated(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Song> songPage = songRepository.findAll(pageable);
+        return songPage.hasContent() ? songPage.getContent() : Collections.emptyList();
     }
 
     public Song getSongById(Integer songId){
