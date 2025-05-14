@@ -17,7 +17,7 @@ public class Song {
     private String spotify_id;
     private String track_name;
     private int duration;
-    @Column(columnDefinition = "tinyint(1)")
+    @Column(columnDefinition = "TINYINT")
     private boolean explicit;
     private int popularity;
     private float tempo;
