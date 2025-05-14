@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Getter @Setter
@@ -28,10 +29,10 @@ public class Song {
             joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id")
     )
-    List<Artist> artists;
+    List<Artist> artists = new ArrayList<>();
 
     @ManyToMany(mappedBy = "songs")
-    List<Album> albums;
+    List<Album> albums = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
