@@ -2,6 +2,7 @@ package com.example.music_recommendation_api.service;
 
 import com.example.music_recommendation_api.model.Song;
 import com.example.music_recommendation_api.repository.SongRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,17 +36,29 @@ public class SongService {
     }
 
     public ArrayList<Song> getSongByGenre(int genre_id){
-        ArrayList<Song> foundSongsByGenre = new ArrayList<>();
-        Iterable<Song> foundSongs = songRepository.findAll();
-        foundSongs.forEach(song -> {foundSongsByGenre.add(song);});
-        return foundSongsByGenre;
+//        ArrayList<Song> foundSongsByGenre = new ArrayList<>();
+//        Iterable<Song> foundSongs = songRepository.findAll();
+//        foundSongs.forEach(song -> {foundSongsByGenre.add(song);});
+//        return foundSongsByGenre;
+        return songRepository.findSongByGenre(genre_id, Sort.by("songs.track_name")).orElseThrow();
     }
 
     public ArrayList<Song> getSongByArtist(int artist_id){
-        ArrayList<Song> foundSongsByArtist = new ArrayList<>();
-        Iterable<Song> foundSongs = songRepository.findAll();
-        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
-        return foundSongsByArtist;
+//        ArrayList<Song> foundSongsByArtist = new ArrayList<>();
+//        Iterable<Song> foundSongs = songRepository.findAll();
+//        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
+//        return foundSongsByArtist;
+        return songRepository.findSongByArtist(artist_id, Sort.by("songs.track_name")).orElseThrow();
+    }
+
+    public ArrayList<Song> getSongByDanceability(float minValue, float maxValue){
+        return songRepository.findSongByDanceability(
+                minValue, maxValue, Sort.by("songs.danceability")).orElseThrow();
+    }
+
+    public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
+        return songRepository.findSongByTempo(
+                minValue, maxValue, Sort.by("songs.tempo")).orElseThrow();
     }
 
 
