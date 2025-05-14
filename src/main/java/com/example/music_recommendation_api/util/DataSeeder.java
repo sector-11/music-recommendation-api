@@ -25,7 +25,7 @@ public class DataSeeder {
 
     @Bean
     public CommandLineRunner checkAndSeed() {
-        if (!songService.getAllSongs().isEmpty()) {
+        if (!songService.getSongsPaginated(0, 5).isEmpty()) {
             return args -> {/*do nothing*/};
         }
         List<FileRow> file = reader.readFile();
