@@ -30,18 +30,18 @@ public class SongController {
         return songService.getAllSongs();
     }
 
-    @GetMapping("/{song_id}")
+    @GetMapping("/byid/{song_id}")
     public Song getSongById(Integer song_id){
         return songService.getSongById(song_id);
     }
 
-    @GetMapping("/{genre_id}")
-    public ArrayList<Song> getSongByGenre(int genre_id){
+    @GetMapping("/bygenre/{genre_id}")
+    public ArrayList<Song> getSongByGenre(Integer genre_id){
         return songService.getSongByGenre(genre_id);
     }
 
-    @GetMapping("/{artist_id}")
-    public ArrayList<Song> getSongByArtist(int artist_id){
+    @GetMapping("/byartist/{artist_id}")
+    public ArrayList<Song> getSongByArtist(Integer artist_id){
         return songService.getSongByArtist(artist_id);
     }
 }

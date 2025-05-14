@@ -35,30 +35,30 @@ public class SongService {
         return songRepository.findById(songId).orElseThrow();
     }
 
-    public ArrayList<Song> getSongByGenre(int genre_id){
+    public ArrayList<Song> getSongByGenre(Integer genre_id){
 //        ArrayList<Song> foundSongsByGenre = new ArrayList<>();
 //        Iterable<Song> foundSongs = songRepository.findAll();
 //        foundSongs.forEach(song -> {foundSongsByGenre.add(song);});
 //        return foundSongsByGenre;
-        return songRepository.findSongByGenre(genre_id, Sort.by("songs.track_name")).orElseThrow();
+        return songRepository.findSongByGenreOrderByTrack_NameAsc(genre_id).orElseThrow();
     }
 
-    public ArrayList<Song> getSongByArtist(int artist_id){
+    public ArrayList<Song> getSongByArtist(Integer artist_id){
 //        ArrayList<Song> foundSongsByArtist = new ArrayList<>();
 //        Iterable<Song> foundSongs = songRepository.findAll();
 //        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
 //        return foundSongsByArtist;
-        return songRepository.findSongByArtist(artist_id, Sort.by("songs.track_name")).orElseThrow();
+        return songRepository.findSongByArtistOrderByTrack_Name(artist_id).orElseThrow();
     }
 
     public ArrayList<Song> getSongByDanceability(float minValue, float maxValue){
-        return songRepository.findSongByDanceability(
-                minValue, maxValue, Sort.by("songs.danceability")).orElseThrow();
+        return songRepository.findSongByDanceabilityOrderByDanceability(
+                minValue, maxValue).orElseThrow();
     }
 
     public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
-        return songRepository.findSongByTempo(
-                minValue, maxValue, Sort.by("songs.tempo")).orElseThrow();
+        return songRepository.findSongByTempoOrderByTempo(
+                minValue, maxValue).orElseThrow();
     }
 
 
