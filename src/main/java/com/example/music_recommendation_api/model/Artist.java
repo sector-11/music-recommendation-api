@@ -1,5 +1,6 @@
 package com.example.music_recommendation_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +17,10 @@ public class Artist {
     private String name;
 
     @ManyToMany(mappedBy = "artists")
+    @JsonIgnore
     List<Album> albums = new ArrayList<>();
 
     @ManyToMany(mappedBy = "artists")
+    @JsonIgnore
     List<Song> songs = new ArrayList<>();
 }

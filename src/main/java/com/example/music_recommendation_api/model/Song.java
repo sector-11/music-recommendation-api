@@ -1,5 +1,6 @@
 package com.example.music_recommendation_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Song {
     private String spotify_id;
     private String track_name;
     private int duration;
+    @Column(columnDefinition = "tinyint(1)")
     private boolean explicit;
     private int popularity;
     private float tempo;
@@ -29,9 +31,11 @@ public class Song {
             joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id")
     )
+    @JsonIgnore
     List<Artist> artists = new ArrayList<>();
 
     @ManyToMany(mappedBy = "songs")
+    @JsonIgnore
     List<Album> albums = new ArrayList<>();
 
     @ManyToOne
