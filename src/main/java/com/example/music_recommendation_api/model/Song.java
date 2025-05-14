@@ -1,29 +1,38 @@
 package com.example.music_recommendation_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    String spotify_id;
-    String track_name;
-    int artist_id;
-    int album_id;
-    int genre_id;
-    int duration;
-    boolean explicit;
-    int popularity;
-    float tempo;
-    float energy;
-    float danceability;
-    float loudness;
+    private String spotify_id;
+    private String track_name;
+    private int duration;
+    private boolean explicit;
+    private int popularity;
+    private float tempo;
+    private float energy;
+    private float danceability;
+    private float loudness;
 
+    @ManyToMany
+    @JoinTable(
+            name = "song_artists",
+            joinColumns = @JoinColumn(name = "album_id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id")
+    )
+    List<Artist> artists;
 
+    @ManyToMany(mappedBy = "songs")
+    List<Album> songs;
+
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
     public String getSpotify_id() {
         return spotify_id;
@@ -39,30 +48,6 @@ public class Song {
 
     public void setTrack_name(String track_name) {
         this.track_name = track_name;
-    }
-
-    public int getArtist_id() {
-        return artist_id;
-    }
-
-    public void setArtist_id(int artist_id) {
-        this.artist_id = artist_id;
-    }
-
-    public int getAlbum_id() {
-        return album_id;
-    }
-
-    public void setAlbum_id(int album_id) {
-        this.album_id = album_id;
-    }
-
-    public int getGenre_id() {
-        return genre_id;
-    }
-
-    public void setGenre_id(int genre_id) {
-        this.genre_id = genre_id;
     }
 
     public int getDuration() {

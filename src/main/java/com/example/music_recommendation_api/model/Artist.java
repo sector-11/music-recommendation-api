@@ -16,4 +16,7 @@ public class Artist {
 
     @ManyToMany(mappedBy = "artists")
     List<Album> albums;
+
+    @ManyToMany(mappedBy = "artists")
+    List<Song> songs;
 }
