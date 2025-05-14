@@ -31,7 +31,7 @@ public class DataFileReader {
             reader.readLine(); //skip first line
 
             while ((line = reader.readLine()) != null) {
-
+                output.add(this.readLine(line));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
