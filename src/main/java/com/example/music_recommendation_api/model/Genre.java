@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity @Getter @Setter
+@Table(name = "genres")
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
