@@ -96,7 +96,7 @@ public class DataFileReader {
     private Song parseSong(FileRow row) {
         Song song = new Song();
 
-        song.setSpotify_id(row.getTrackId());
+        song.setSpotifyId(row.getTrackId());
         song.setTrack_name(row.getTrackName());
         song.setDuration(row.getDurationMs());
         song.setExplicit(row.isExplicit());
