@@ -45,6 +45,10 @@ public class SongService {
         return songRepository.findById(songId).orElseThrow();
     }
 
+    public Song getSongBySpotifyId(String spotifyId){
+        return songRepository.findSongBySpotifyId(spotifyId).orElseThrow();
+    }
+
     public ArrayList<Song> getSongByGenre(Integer genre_id){
         return songRepository.findSongByGenre(genre_id, Sort.by("track_name")).orElseThrow();
     }
