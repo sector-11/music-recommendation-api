@@ -14,28 +14,26 @@ import java.util.Optional;
 @Repository
 public interface SongRepository extends JpaRepository<Song, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT songs.* FROM songs " +
-            "INNER JOIN genres ON songs.genre_id = genres.id " +
-            "WHERE genres.id =:genreId ")
-    Optional<ArrayList<Song>> findSongByGenreOrderByTrack_NameAsc(@Param("genreId")Integer genre_id);
+    @Query(nativeQuery = true, value = "SELECT * FROM songs WHERE genre_id = :genreId")
+    Optional<ArrayList<Song>> findSongByGenreOrderByTrack_NameAsc(@Param("genreId") Integer genreId);
 
     @Query(nativeQuery = true, value = "SELECT songs.* FROM songs " +
             "INNER JOIN song_artists ON song_artists.song_id = songs.id " +
             "INNER JOIN artists ON song_artists.artist_id = artists.id " +
-            "WHERE artists.id =:artistId ")
-    Optional<ArrayList<Song>> findSongByArtistOrderByTrack_Name(@Param("artistId") Integer artist_id);
+            "WHERE artists.id = :artistId ")
+    Optional<ArrayList<Song>> findSongByArtistOrderByTrack_NameAsc(@Param("artistId") Integer artist_id);
 
     @Query(nativeQuery = true, value = "SELECT DISTINCT songs.* FROM songs " +
             "INNER JOIN song_artists ON song_artists.song_id = songs.id " +
             "INNER JOIN artists ON song_artists.artist_id = artists.id " +
-            "WHERE songs.danceability >:min AND songs.danceability <:max")
-    Optional<ArrayList<Song>> findSongByDanceabilityOrderByDanceability(@Param("min") float minValue,
+            "WHERE songs.danceability > :min AND songs.danceability < :max")
+    Optional<ArrayList<Song>> findSongByDanceabilityOrderByDanceabilityAsc(@Param("min") float minValue,
                                                      @Param("max") float maxValue);
 
     @Query(nativeQuery = true, value = "SELECT DISTINCT songs.* FROM songs " +
             "INNER JOIN song_artists ON song_artists.song_id = songs.id " +
             "INNER JOIN artists ON song_artists.artist_id = artists.id " +
-            "WHERE songs.tempo >:min AND songs.tempo <:max")
-    Optional<ArrayList<Song>> findSongByTempoOrderByTempo(@Param("min") float minValue,
+            "WHERE songs.tempo > :min AND songs.tempo < :max")
+    Optional<ArrayList<Song>> findSongByTempoOrderByTempoAsc(@Param("min") float minValue,
                                               @Param("max") float maxValue);
 }

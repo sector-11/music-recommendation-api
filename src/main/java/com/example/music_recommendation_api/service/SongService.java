@@ -58,16 +58,16 @@ public class SongService {
 //        Iterable<Song> foundSongs = songRepository.findAll();
 //        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
 //        return foundSongsByArtist;
-        return songRepository.findSongByArtistOrderByTrack_Name(artist_id).orElseThrow();
+        return songRepository.findSongByArtistOrderByTrack_NameAsc(artist_id).orElseThrow();
     }
 
     public ArrayList<Song> getSongByDanceability(float minValue, float maxValue){
-        return songRepository.findSongByDanceabilityOrderByDanceability(
+        return songRepository.findSongByDanceabilityOrderByDanceabilityAsc(
                 minValue, maxValue).orElseThrow();
     }
 
     public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
-        return songRepository.findSongByTempoOrderByTempo(
+        return songRepository.findSongByTempoOrderByTempoAsc(
                 minValue, maxValue).orElseThrow();
     }
 
