@@ -1,5 +1,6 @@
 package com.example.music_recommendation_api.repository;
 
+import com.example.music_recommendation_api.model.Genre;
 import com.example.music_recommendation_api.model.Song;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,4 +39,6 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
                                               @Param("max") float maxValue,
                                                              Sort sort);
     Optional<Song> findSongBySpotifyId(String spotifyId);
+
+    Optional<ArrayList<Song>> findByDanceabilityBetweenAndTempoBetweenAndGenreOrderByPopularityDesc(float danceabilityMin, float danceabilityMax, float tempoMin, float tempoMax, Genre genre);
 }
