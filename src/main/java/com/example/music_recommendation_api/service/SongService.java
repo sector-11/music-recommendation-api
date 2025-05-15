@@ -1,6 +1,8 @@
 package com.example.music_recommendation_api.service;
 
+import com.example.music_recommendation_api.model.Artist;
 import com.example.music_recommendation_api.model.Song;
+import com.example.music_recommendation_api.repository.ArtistRepository;
 import com.example.music_recommendation_api.repository.SongRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +17,11 @@ import java.util.List;
 @Service
 public class SongService {
     private final SongRepository songRepository;
+    private final ArtistRepository artistRepository;
 
-    public SongService(SongRepository songRepository){
+    public SongService(SongRepository songRepository, ArtistRepository artistRepository){
         this.songRepository = songRepository;
+        this.artistRepository = artistRepository;
     }
 
     // add a song
@@ -42,29 +46,49 @@ public class SongService {
     }
 
     public Song getSongById(Integer songId){
-        return songRepository.findById(songId).orElseThrow();
+        Song song = songRepository.findById(songId).orElseThrow();
+        song.setArtists(getArtistsOfSong(song.getId()));
+        return song;
     }
 
     public ArrayList<Song> getSongByGenre(Integer genre_id){
-        return songRepository.findSongByGenre(genre_id, Sort.by("track_name")).orElseThrow();
+        ArrayList<Song> songList = songRepository.findSongByGenre(genre_id, Sort.by("track_name")).orElseThrow();
+        setSongsArtists(songList);
+        return songList;
     }
 
     public ArrayList<Song> getSongByArtist(Integer artist_id){
-        return songRepository.findSongByArtist(artist_id, Sort.by("track_name")).orElseThrow();
+        ArrayList<Song> songList = songRepository.findSongByArtist(artist_id, Sort.by("track_name")).orElseThrow();
+        setSongsArtists(songList);
+        return songList;
     }
 
     public ArrayList<Song> getSongByDanceability(float minValue, float maxValue){
-        return songRepository.findSongByDanceability(
+        ArrayList<Song> songList = songRepository.findSongByDanceability(
                 minValue, maxValue, Sort.by("danceability")).orElseThrow();
+        setSongsArtists(songList);
+        return songList;
     }
 
     public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
-        return songRepository.findSongByTempo(
+        ArrayList<Song> songList = songRepository.findSongByTempo(
                 minValue, maxValue, Sort.by("tempo")).orElseThrow();
+        setSongsArtists(songList);
+        return songList;
     }
 
     public List<Song> getSongByPopularity(int page, int size) {
         Page<Song> songPage = songRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "popularity")));
+        songPage.forEach(song -> song.setArtists(getArtistsOfSong(song.getId())));
         return songPage.hasContent() ? songPage.getContent() : Collections.emptyList();
+    }
+
+    public ArrayList<Song> setSongsArtists(ArrayList<Song> songList){
+        songList.forEach(song -> song.setArtists(getArtistsOfSong(song.getId())));
+        return songList;
+    }
+
+    public List<Artist> getArtistsOfSong(int songId){
+        return artistRepository.findSongArtistsBySong(songId, Sort.by("artists.name")).orElseThrow();
     }
 }
