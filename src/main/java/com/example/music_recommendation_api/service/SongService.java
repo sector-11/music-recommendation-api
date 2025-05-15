@@ -51,6 +51,10 @@ public class SongService {
         return song;
     }
 
+    public Song getSongBySpotifyId(String spotifyId){
+        return songRepository.findSongBySpotifyId(spotifyId).orElseThrow();
+    }
+
     public ArrayList<Song> getSongByGenre(Integer genre_id){
         ArrayList<Song> songList = songRepository.findSongByGenre(genre_id, Sort.by("track_name")).orElseThrow();
         setSongsArtists(songList);
@@ -88,7 +92,24 @@ public class SongService {
         return songList;
     }
 
-    public List<Artist> getArtistsOfSong(int songId){
+    public List<Artist> getArtistsOfSong(int songId) {
         return artistRepository.findSongArtistsBySong(songId, Sort.by("artists.name")).orElseThrow();
+    }
+
+    public List<Song> getSimilarSongs(String spotifyId, int page, int size) {
+        Song song = songRepository.findSongBySpotifyId(spotifyId).orElseThrow();
+        float danceability = song.getDanceability();
+        float tempo = song.getTempo();
+
+        List<Song> songs = songRepository.findByDanceabilityBetweenAndTempoBetweenAndGenreOrderByPopularityDesc(
+                danceability - 0.1f, danceability + 0.1f,
+                tempo - 5f, tempo + 5f,
+                song.getGenre(),
+                PageRequest.of(page, size + 1)
+        ).orElseThrow();
+
+        songs.remove(song);
+
+        return songs;
     }
 }

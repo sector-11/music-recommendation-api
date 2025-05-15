@@ -33,6 +33,11 @@ public class SongController {
         return songService.getSongById(song_id);
     }
 
+    @GetMapping("/byspotifyid/{spotify_id}")
+    public Song getSongById(@PathVariable String spotify_id){
+        return songService.getSongBySpotifyId(spotify_id);
+    }
+
     @GetMapping("/bygenre/{genre_id}")
     public ArrayList<Song> getSongByGenre(@PathVariable Integer genre_id){
         return songService.getSongByGenre(genre_id);
@@ -57,5 +62,12 @@ public class SongController {
     public List<Song> getSongByPopularity(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
                                           @RequestParam(name = "size", defaultValue = "10", required = false) int size){
         return songService.getSongByPopularity(page, size);
+    }
+
+    @GetMapping("/recommend/{spotifyID}")
+    public List<Song> getRecommended(@PathVariable(name = "spotifyID") String spotifyId,
+                                     @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                     @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
+        return songService.getSimilarSongs(spotifyId, page, size);
     }
 }
