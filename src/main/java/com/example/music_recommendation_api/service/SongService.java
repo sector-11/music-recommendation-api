@@ -5,6 +5,7 @@ import com.example.music_recommendation_api.repository.SongRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,18 +45,30 @@ public class SongService {
         return songRepository.findById(songId).orElseThrow();
     }
 
-    public ArrayList<Song> getSongByGenre(int genre_id){
-        ArrayList<Song> foundSongsByGenre = new ArrayList<>();
-        Iterable<Song> foundSongs = songRepository.findAll();
-        foundSongs.forEach(song -> {foundSongsByGenre.add(song);});
-        return foundSongsByGenre;
+    public ArrayList<Song> getSongByGenre(Integer genre_id){
+//        ArrayList<Song> foundSongsByGenre = new ArrayList<>();
+//        Iterable<Song> foundSongs = songRepository.findAll();
+//        foundSongs.forEach(song -> {foundSongsByGenre.add(song);});
+//        return foundSongsByGenre;
+        return songRepository.findSongByGenreOrderByTrack_NameAsc(genre_id).orElseThrow();
     }
 
-    public ArrayList<Song> getSongByArtist(int artist_id){
-        ArrayList<Song> foundSongsByArtist = new ArrayList<>();
-        Iterable<Song> foundSongs = songRepository.findAll();
-        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
-        return foundSongsByArtist;
+    public ArrayList<Song> getSongByArtist(Integer artist_id){
+//        ArrayList<Song> foundSongsByArtist = new ArrayList<>();
+//        Iterable<Song> foundSongs = songRepository.findAll();
+//        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
+//        return foundSongsByArtist;
+        return songRepository.findSongByArtistOrderByTrack_NameAsc(artist_id).orElseThrow();
+    }
+
+    public ArrayList<Song> getSongByDanceability(float minValue, float maxValue){
+        return songRepository.findSongByDanceabilityOrderByDanceabilityAsc(
+                minValue, maxValue).orElseThrow();
+    }
+
+    public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
+        return songRepository.findSongByTempoOrderByTempoAsc(
+                minValue, maxValue).orElseThrow();
     }
 
 
