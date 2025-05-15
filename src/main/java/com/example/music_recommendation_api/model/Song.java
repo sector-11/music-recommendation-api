@@ -31,7 +31,6 @@ public class Song {
             joinColumns = @JoinColumn(name = "song_id"),
             inverseJoinColumns = @JoinColumn(name = "artist_id")
     )
-    @JsonIgnore
     List<Artist> artists = new ArrayList<>();
 
     @ManyToMany(mappedBy = "songs")
