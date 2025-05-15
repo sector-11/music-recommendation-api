@@ -80,7 +80,8 @@ public class SongService {
         List<Song> songs = songRepository.findByDanceabilityBetweenAndTempoBetweenAndGenreOrderByPopularityDesc(
                 danceability - 0.1f, danceability + 0.1f,
                 tempo - 5f, tempo + 5f,
-                song.getGenre()
+                song.getGenre(),
+                PageRequest.of(page, size + 1)
         ).orElseThrow();
 
         songs.remove(song);
