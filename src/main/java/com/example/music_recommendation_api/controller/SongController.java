@@ -63,4 +63,11 @@ public class SongController {
                                           @RequestParam(name = "size", defaultValue = "10", required = false) int size){
         return songService.getSongByPopularity(page, size);
     }
+
+    @GetMapping("/recommend/{spotifyID}")
+    public List<Song> getRecommended(@PathVariable(name = "spotifyID") String spotifyId,
+                                     @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                     @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
+        return songService.getSimilarSongs(spotifyId, page, size);
+    }
 }
