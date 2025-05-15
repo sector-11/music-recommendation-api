@@ -71,4 +71,20 @@ public class SongService {
         Page<Song> songPage = songRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "popularity")));
         return songPage.hasContent() ? songPage.getContent() : Collections.emptyList();
     }
+
+    public List<Song> getSimilarSongs(String spotifyId, int page, int size) {
+        Song song = songRepository.findSongBySpotifyId(spotifyId).orElseThrow();
+        float danceability = song.getDanceability();
+        float tempo = song.getTempo();
+
+        List<Song> songs = songRepository.findByDanceabilityBetweenAndTempoBetweenAndGenreOrderByPopularityDesc(
+                danceability - 0.1f, danceability + 0.1f,
+                tempo - 5f, tempo + 5f,
+                song.getGenre()
+        ).orElseThrow();
+
+        songs.remove(song);
+
+        return songs;
+    }
 }
