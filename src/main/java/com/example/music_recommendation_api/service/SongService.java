@@ -63,6 +63,8 @@ public class SongService {
                 minValue, maxValue, Sort.by("tempo")).orElseThrow();
     }
 
-
-
+    public List<Song> getSongByPopularity(int page, int size) {
+        Page<Song> songPage = songRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "popularity")));
+        return songPage.hasContent() ? songPage.getContent() : Collections.emptyList();
+    }
 }

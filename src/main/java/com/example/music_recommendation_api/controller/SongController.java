@@ -52,4 +52,10 @@ public class SongController {
     public ArrayList<Song> getSongByTempo(@PathVariable Float minValue, @PathVariable Float maxValue){
         return songService.getSongByTempo(minValue, maxValue);
     }
+
+    @GetMapping("/bypopularity")
+    public List<Song> getSongByPopularity(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                          @RequestParam(name = "size", defaultValue = "10", required = false) int size){
+        return songService.getSongByPopularity(page, size);
+    }
 }
