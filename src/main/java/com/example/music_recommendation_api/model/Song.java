@@ -14,7 +14,7 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String spotify_id;
+    private String spotifyId;
     private String track_name;
     private int duration;
     @Column(columnDefinition = "TINYINT")
