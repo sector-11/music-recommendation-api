@@ -21,6 +21,7 @@ public class DataFileReader {
     private final Map<String, Artist> artists = new HashMap<>();
     private final Map<String, Album> albums = new HashMap<>();
     private final Map<String, Genre> genres = new HashMap<>();
+    private final List<String> uniqueSongs = new ArrayList<>();
 
     @Autowired
     private final AlbumService albumService;
@@ -111,7 +112,17 @@ public class DataFileReader {
 
     public void parseAll(List<FileRow> rows) {
         for (FileRow row : rows) {
-            Song song = songService.addSong(this.parseSong(row));
+            Song song = this.parseSong(row);
+            String songString = song.getTrack_name() + " by " + song.getArtists();
+
+            if (uniqueSongs.contains(songString)) {
+                continue;
+            } else {
+                uniqueSongs.add(songString);
+            }
+
+            song = songService.addSong(song);
+
             String[] songArtists = row.getArtists().split(";");
 
             if(!albums.containsKey(row.getAlbumName())) {
