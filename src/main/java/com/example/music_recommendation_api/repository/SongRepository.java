@@ -37,4 +37,5 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
     Optional<ArrayList<Song>> findSongByTempo(@Param("min") float minValue,
                                               @Param("max") float maxValue,
                                                              Sort sort);
+    Optional<Song> findSongBySpotifyId(String spotifyId);
 }
