@@ -45,7 +45,7 @@ public class ArtistController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteArtistById(@RequestParam(name = "auth") String authorization,
-                                                   @PathVariable(name = "id") int id) {
+                                                       @PathVariable(name = "id") int id) {
         Secrets secrets = new Secrets();
         if (secrets.getAdmin().equals(authorization)) {
             artistService.deleteArtistById(id);

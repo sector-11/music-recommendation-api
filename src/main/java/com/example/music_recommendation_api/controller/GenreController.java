@@ -34,7 +34,7 @@ public class GenreController {
 
     @PostMapping
     public ResponseEntity<Genre> postGenre(@RequestParam(name = "auth") String authorization,
-                                             @RequestBody Genre genre) {
+                                           @RequestBody Genre genre) {
         Secrets secrets = new Secrets();
         if (secrets.getAdmin().equals(authorization)) {
             return new ResponseEntity<>(genreService.addGenre(genre), HttpStatus.CREATED);
@@ -45,7 +45,7 @@ public class GenreController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteGenreById(@RequestParam(name = "auth") String authorization,
-                                                       @PathVariable(name = "id") int id) {
+                                                      @PathVariable(name = "id") int id) {
         Secrets secrets = new Secrets();
         if (secrets.getAdmin().equals(authorization)) {
             genreService.deleteGenreById(id);

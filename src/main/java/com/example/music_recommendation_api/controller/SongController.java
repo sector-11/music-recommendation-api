@@ -73,7 +73,7 @@ public class SongController {
 
     @GetMapping("/bypopularity")
     public ResponseEntity<List<Song>> getSongByPopularity(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
-                                          @RequestParam(name = "size", defaultValue = "10", required = false) int size){
+                                                          @RequestParam(name = "size", defaultValue = "10", required = false) int size){
         List<Song> songList = songService.getSongByPopularity(page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
@@ -82,8 +82,8 @@ public class SongController {
 
     @GetMapping("/recommend/{spotifyID}")
     public ResponseEntity<List<Song>> getRecommended(@PathVariable(name = "spotifyID") String spotifyId,
-                                     @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-                                     @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
+                                                     @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                     @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
         List<Song> songList = songService.getSimilarSongs(spotifyId, page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
