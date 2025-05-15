@@ -33,6 +33,11 @@ public class SongController {
         return songService.getSongById(song_id);
     }
 
+    @GetMapping("/byspotifyid/{spotify_id}")
+    public Song getSongById(@PathVariable String spotify_id){
+        return songService.getSongBySpotifyId(spotify_id);
+    }
+
     @GetMapping("/bygenre/{genre_id}")
     public ArrayList<Song> getSongByGenre(@PathVariable Integer genre_id){
         return songService.getSongByGenre(genre_id);
