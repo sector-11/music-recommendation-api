@@ -60,7 +60,7 @@ public class SongService {
 
     public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
         return songRepository.findSongByTempo(
-                minValue, maxValue, Sort.by("songs.tempo")).orElseThrow();
+                minValue, maxValue, Sort.by("tempo")).orElseThrow();
     }
 
 
