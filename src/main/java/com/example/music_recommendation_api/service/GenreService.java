@@ -14,6 +14,15 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
+
+    public Genre addGenre(Genre genre) {
+        return genreRepository.save(genre);
+    }
+
+    public Genre getGenreById(int id) {
+        return genreRepository.findById(id).orElseThrow();
+    }
+
     public List<Genre> getAllGenres() {
         return genreRepository.findAll();
     }

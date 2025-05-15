@@ -1,9 +1,11 @@
 package com.example.music_recommendation_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Getter @Setter
@@ -15,5 +17,6 @@ public class Genre {
     private String genre;
 
     @OneToMany(mappedBy = "genre")
-    List<Song> songs;
+    @JsonIgnore
+    List<Song> songs = new ArrayList<>();
 }
