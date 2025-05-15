@@ -1,0 +1,56 @@
+,track_id,artists,album_name,track_name,popularity,duration_ms,explicit,danceability,energy,key,loudness,mode,speechiness,acousticness,instrumentalness,liveness,valence,tempo,time_signature,track_genre
+0,9c92rEv26XyWltGripkZ,Gen Hoshino,Comedy,Comedy,73,230666,False,0.676,0.461,1,-6.746,0,0.143,0.0322,1.01e-06,0.358,0.715,87.917,4,acoustic
+1,W7deRfbx086IByq7C0gd,Ben Woodward,Ghost (Acoustic),Ghost - Acoustic,55,149610,False,0.42,0.166,1,-17.235,1,0.0763,0.924,5.56e-06,0.101,0.267,77.489,4,acoustic
+2,s1oB772yxkb6dzwsnES4,Ingrid Michaelson;ZAYN,To Begin Again,To Begin Again,57,210826,False,0.438,0.359,0,-9.734,1,0.0557,0.21,0.0,0.117,0.12,76.332,4,acoustic
+3,0H9w9K6jzjImMIA4M7CK,Kina Grannis,Crazy Rich Asians (Original Motion Picture Soundtrack),Can't Help Falling In Love,71,201933,False,0.266,0.0596,0,-18.515,1,0.0363,0.905,7.07e-05,0.132,0.143,181.74,3,acoustic
+4,f25WjdXWn9rfGNxQ01cq,Chord Overstreet,Hold On,Hold On,82,198853,False,0.618,0.443,2,-9.681,1,0.0526,0.469,0.0,0.0829,0.167,119.949,4,acoustic
+5,1pK6XbmqIKztT8JO7pK4,Tyrone Wells,Days I Will Remember,Days I Will Remember,58,214240,False,0.688,0.481,6,-8.807,1,0.105,0.289,0.0,0.189,0.666,98.017,4,acoustic
+6,u9tRUmMi9Fl7Kdg5V22W,A Great Big World;Christina Aguilera,Is There Anybody Out There?,Say Something,74,229400,False,0.407,0.147,2,-8.822,1,0.0355,0.857,2.89e-06,0.0913,0.0765,141.284,3,acoustic
+7,m4x7DN95Fvw2jNPvSUVO,Jason Mraz,We Sing. We Dance. We Steal Things.,I'm Yours,80,242946,False,0.703,0.444,11,-9.331,1,0.0417,0.559,0.0,0.0973,0.712,150.96,4,acoustic
+8,T274e71JrckUQgrXBwVm,Jason Mraz;Colbie Caillat,We Sing. We Dance. We Steal Things.,Lucky,74,189613,False,0.625,0.414,0,-8.7,1,0.0369,0.294,0.0,0.151,0.669,130.088,4,acoustic
+9,EcAkX1i2zI225H3kiMMT,Ross Copperman,Hunger,Hunger,56,205594,False,0.442,0.632,1,-6.77,1,0.0295,0.426,0.00419,0.0735,0.196,78.899,4,acoustic
+10,8E5rd2Sze1wVIdAFDhrq,Zack Tabudlo,Episode,Give Me Your Forever,74,244800,False,0.627,0.363,8,-8.127,1,0.0291,0.279,0.0,0.0928,0.301,99.905,4,acoustic
+11,yq85s6Ascw2VLBlyTh83,Jason Mraz,Love Is a Four Letter Word,I Won't Give Up,69,240165,False,0.483,0.303,4,-10.058,1,0.0429,0.694,0.0,0.115,0.139,133.406,3,acoustic
+12,Um775kGc9OSFQmGZ0lJD,Dan Berk,Solo,Solo,52,198712,False,0.489,0.314,7,-9.245,0,0.0331,0.749,0.0,0.113,0.607,124.234,4,acoustic
+13,R9BaKMh4P8xssY8oi4sD,Anna Hamilton,Bad Liar,Bad Liar,62,248448,False,0.691,0.234,3,-6.441,1,0.0285,0.777,0.0,0.12,0.209,87.103,4,acoustic
+14,80cf3S5SP8FnzDf9qOdD,Chord Overstreet;Deepend,Hold On (Remix),Hold On - Remix,56,188133,False,0.755,0.78,2,-6.084,1,0.0327,0.124,2.83e-05,0.121,0.387,120.004,4,acoustic
+15,ZYFgl1sCY616r3GGWBV3,Landon Pigg,The Boy Who Never,Falling in Love at a Coffee Shop,58,244986,False,0.489,0.561,4,-7.933,1,0.0274,0.2,4.56e-05,0.179,0.238,83.457,3,acoustic
+16,3Br9260V2BKt4nBmHkN7,Andrew Foy;Renee Foy,ily (i love you baby),ily (i love you baby),56,129750,False,0.706,0.112,2,-18.098,1,0.0391,0.827,4.03e-06,0.125,0.414,110.154,4,acoustic
+17,GRc0fcSczKNZ7CIYhfF1,Andrew Foy;Renee Foy,At My Worst,At My Worst,54,169728,False,0.795,0.0841,10,-18.09,0,0.0461,0.742,1.17e-05,0.0853,0.609,91.803,4,acoustic
+18,Q5nzj5o2m9FKfJeTuLBz,Jason Mraz;Colbie Caillat,We Sing. We Dance. We Steal Things.,Lucky,68,189613,False,0.625,0.414,0,-8.7,1,0.0369,0.294,0.0,0.151,0.669,130.088,4,acoustic
+19,AijogVOFS848ti3LcuO4,Boyce Avenue;Bea Miller,"Cover Sessions, Vol. 4",Photograph,67,260186,False,0.717,0.32,3,-8.393,1,0.0283,0.83,0.0,0.107,0.322,107.946,4,acoustic
+20,0Xx1KFfziq11BCTwLold,Jason Mraz,We Sing. We Dance. We Steal Things.,I'm Yours,75,242946,False,0.703,0.444,11,-9.331,1,0.0417,0.559,0.0,0.0973,0.712,150.96,4,acoustic
+21,V746Oh81nm7W1PgIWjlm,Alexis Ffrench,Truth - The Solo Piano Collection,Guiding Light - Solo Piano Version,24,196857,False,0.314,0.0324,5,-24.132,1,0.053,0.986,0.921,0.115,0.233,68.246,5,ambient
+22,5PaT4yB1tnyd74SaaCKG,aswekeepsearching,Sleep,Sleep Now,17,277200,False,0.559,0.224,6,-18.199,0,0.0317,0.89,0.921,0.11,0.221,100.03,4,ambient
+23,E6m6W60okGIG813LGhFg,Gustavo Santaolalla,The Last of Us Part II (Original Soundtrack),It Can't Last,45,139480,False,0.504,0.108,4,-16.284,0,0.0712,0.964,0.818,0.0721,0.0761,163.648,4,ambient
+24,66bK78V5FvJcxdLncAwZ,Kensuke Ushio,DEVILMAN crybaby (Original Soundtrack),Crybaby,46,249333,False,0.172,0.371,11,-10.516,0,0.033,0.904,0.921,0.107,0.101,63.998,4,anime
+25,A0LAqvl3EmGp0Uy2KHzb,Tom Jones,Tom Jones Sings She's A Lady,She's A Lady,63,174146,False,0.51,0.876,2,-9.101,1,0.161,0.212,0.0,0.248,0.624,119.702,4,british
+26,kSV66h8B83Uco7inrypD,The Beatles,1 (Remastered),I Feel Fine - Remastered 2015,62,139346,False,0.564,0.827,7,-7.089,1,0.0283,0.0904,3.73e-06,0.127,0.912,89.847,4,british
+27,zegzjk61Z16yJ0oas9P8,The Beatles,Taxman (2022 Mix),Taxman - 2022 Mix,60,158266,False,0.493,0.762,7,-6.114,1,0.147,0.00216,0.0,0.713,0.708,133.227,4,british
+28,d3B32L6m6xhnR17ob6PE,Adele,19,Hometown Glory,62,271226,True,0.436,0.336,10,-8.517,0,0.037,0.962,3.4e-05,0.102,0.21,122.456,4,british
+29,OIVWcgvP4764qqhA8Jg3,Peppa Pig,My First Album,Jumping In Muddy Puddles,49,170964,False,0.738,0.476,4,-5.721,1,0.0519,0.658,0.0,0.3,0.631,129.905,4,british
+30,r1m1OV4EdRf0e895Aw9t,Peppa Pig,My Friend Peppa,My Friend Peppa,45,237114,False,0.804,0.709,5,-7.104,1,0.0409,0.384,0.0,0.0879,0.923,137.956,4,british
+31,z6jE8KBQ6nVyv485U2HL,The Beatles,A Hard Day's Night (Remastered),If I Fell - Remastered 2009,61,139466,False,0.665,0.31,2,-8.928,1,0.0278,0.68,0.0,0.0877,0.568,108.211,4,british
+32,sN29gP4WsnT0jNHTwX7S,The Chemical Brothers,It Began In Afrika,It Began In Afrika - Radio Edit,12,218546,False,0.59,0.893,2,-6.079,1,0.0983,0.00365,0.0636,0.0865,0.342,133.971,3,breakbeat
+33,Bgwyi6h84rUCWC4ao1Qm,Force Mass Motion,Motions Beyond,Fantasy,11,522866,False,0.601,0.75,9,-11.947,1,0.0419,0.0608,0.374,0.0639,0.222,132.004,4,breakbeat
+34,6wR0i8TqQlaguhtjj0pK,Stanton Warriors,Rebel Bass,Too Long (feat. Lily McKenzie),12,206623,False,0.753,0.806,5,-5.417,0,0.042,0.00726,0.119,0.117,0.428,125.999,4,breakbeat
+35,fVxA5e6rowI4BoOuoJ5h,Uberzone,Bounce,Bounce - Uberzone Original Mix,11,332533,False,0.746,0.963,1,-6.487,1,0.101,0.000229,0.834,0.329,0.243,129.0,4,breakbeat
+36,SszKvTmw8Q16b54rrr9K,The Chemical Brothers;Fatboy Slim,Come With Us / The Test,Come With Us - Fatboy Slim Remix,11,443186,False,0.658,0.846,7,-11.686,1,0.0689,0.13,0.844,0.767,0.594,124.976,4,breakbeat
+37,6lXq5851px8SVuvacHA0,The Chemical Brothers;The Glimmers,The Salmon Dance,The Salmon Dance - Heavily Smoked By The Glimmers,12,307946,False,0.944,0.552,0,-5.978,1,0.0628,0.00104,0.0459,0.0939,0.715,127.992,4,breakbeat
+38,dxpBlM31KCt3ZXzn48Qx,The Prodigy,Spitfire,Spitfire - Nightbreed Mix,12,368760,False,0.401,0.987,2,-3.567,1,0.342,0.000675,0.573,0.266,0.146,178.075,4,breakbeat
+39,tD90d71Lc5ib9yfPJBhx,The Prodigy;Zeds Dead,The Added Fat EP,Breathe - Zeds Dead Remix,12,276386,False,0.672,0.989,3,-2.425,0,0.164,0.175,0.583,0.284,0.156,125.999,4,breakbeat
+40,w06fOBHg2oxT4Tomylj4,The Chemical Brothers,Brotherhood,Electronic Battle Weapon 9,12,400866,False,0.722,0.944,10,-5.071,0,0.0481,0.0262,0.782,0.352,0.327,126.971,4,breakbeat
+41,A8slG2g5f5bRhH99R9JH,Fluke,Six Wheels On My Wagon,Slowmotion,12,311106,False,0.66,0.452,7,-18.52,1,0.03,0.464,0.81,0.105,0.637,109.691,4,breakbeat
+42,H0w0t80bnDarICnUxJRl,The Prodigy,No Good (Start the Dance),No Good (Start The Dance) - Bad For You Mix,11,411866,False,0.672,0.872,7,-13.052,1,0.0402,0.00212,0.878,0.0265,0.389,144.014,4,breakbeat
+43,0hK5q5NyUqRZ7LbP4v2C,Audio Bullys;Nancy Sinatra,I'm In Love,Shot You Down - Audio Bullys Remix Edit; Feat. Nancy Sinatra,11,393826,False,0.54,0.613,10,-3.885,1,0.0514,0.147,0.459,0.064,0.137,126.194,4,breakbeat
+44,zjt6KInS97B2eU4PeuAJ,The Chemical Brothers,Brotherhood,Electronic Battle Weapon 2,11,436466,False,0.67,0.935,1,-4.337,0,0.0865,0.265,0.0901,0.0958,0.164,129.009,4,breakbeat
+45,THN63G6Mn0oD1UJrZ8xz,The Chemical Brothers,Brotherhood,Electronic Battle Weapon 4,12,365759,False,0.692,0.982,3,-4.799,1,0.0386,0.00375,0.875,0.099,0.495,140.993,4,breakbeat
+46,vu4ruG647F0E1tpBYPCO,The Wiggles,Yummy Yummy,Hot Potato,59,81066,False,0.669,0.737,0,-7.974,1,0.0975,0.0289,0.0,0.204,0.948,170.925,4,children
+47,f4Y8A2F8qsySuNGprlDM,Pinkfong,Pinkfong & Baby Shark Halloween Zombi,Boda de Sirenas en Halloween,21,98630,False,0.572,0.557,7,-5.317,1,0.0748,0.286,0.0,0.0468,0.322,127.688,4,children
+48,99sfeWv5r995gAKMiRLG,Alphaville,Forever Young (Super Deluxe Edition; 2019 Remaster),Big in Japan - 2019 Remaster,65,284625,False,0.757,0.596,7,-8.039,1,0.0339,0.0409,0.0447,0.171,0.195,97.769,4,synth-pop
+49,E325crtn2Pl26hbwhXDF,Electroforez,505,Я ничего не могу с собою сделать,49,271671,False,0.587,0.825,1,-7.338,1,0.0353,0.000393,0.89,0.375,0.471,99.996,4,synth-pop
+50,oOsa438H2YrWNDO50FqU,Modern Talking,Ready For Romance,Atlantis Is Calling (S.O.S. for Love),59,230000,False,0.707,0.64,3,-11.674,0,0.0371,0.214,0.000247,0.0624,0.731,113.448,4,synth-pop
+51,SzV44J2e7CxH4gWBg3XK,a-ha,"East of the Sun, West of the Moon",Crying in the Rain,63,260226,False,0.394,0.547,2,-9.276,1,0.0383,0.436,0.000111,0.344,0.151,181.74,4,synth-pop
+52,1unoN0Q5PaOoOjBIcSZ0,Berlin,Take My Breath Away (as heard in Top Gun) (Re-Recorded / Remastered),Take My Breath Away (as heard in Top Gun) (Re-Recorded / Remastered),60,249249,False,0.518,0.642,10,-6.009,0,0.025,0.172,4.04e-06,0.431,0.597,96.225,4,synth-pop
+53,Oc041tihZtsk3wJpv9DB,Rick Astley,Whenever You Need Somebody,Together Forever,68,205533,False,0.702,0.933,2,-11.876,1,0.0492,0.0519,0.000128,0.155,0.896,115.114,4,synth-pop
+54,Kuk7YLwFdi23Cz8YnTel,Duran Duran,Rio (Collector's Edition),Hungry Like the Wolf - 2009 Remaster,73,220626,False,0.691,0.812,0,-7.772,1,0.0558,0.0433,1.16e-06,0.299,0.685,127.568,4,synth-pop
