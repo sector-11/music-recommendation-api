@@ -34,7 +34,6 @@ public class Song {
     List<Artist> artists = new ArrayList<>();
 
     @ManyToMany(mappedBy = "songs")
-    @JsonIgnore
     List<Album> albums = new ArrayList<>();
 
     @ManyToOne
