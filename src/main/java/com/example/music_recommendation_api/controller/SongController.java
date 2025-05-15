@@ -2,6 +2,7 @@ package com.example.music_recommendation_api.controller;
 
 
 import com.example.music_recommendation_api.model.Song;
+import com.example.music_recommendation_api.secrets.Secrets;
 import com.example.music_recommendation_api.service.SongService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,6 @@ public class SongController {
         this.songService = songService;
     }
 
-
-    @PostMapping
-    public ResponseEntity<Song> addSong(Song song){
-        return new ResponseEntity<>(songService.addSong(song), HttpStatus.CREATED);
-    }
 
     @GetMapping
     public ResponseEntity<List<Song>> getAllSongs() {
@@ -92,5 +88,33 @@ public class SongController {
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(songList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Song> getSongById(@PathVariable(name = "id") int id) {
+        return new ResponseEntity<>(songService.getSongById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Song> postSong(@RequestParam(name = "auth") String authorization,
+                                         @RequestBody Song song) {
+        Secrets secrets = new Secrets();
+        if (secrets.getAdmin().equals(authorization)) {
+            return new ResponseEntity<>(songService.addSong(song), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteSongById(@RequestParam(name = "auth") String authorization,
+                                                     @PathVariable(name = "id") int id) {
+        Secrets secrets = new Secrets();
+        if (secrets.getAdmin().equals(authorization)) {
+            songService.deleteSongById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
     }
 }
