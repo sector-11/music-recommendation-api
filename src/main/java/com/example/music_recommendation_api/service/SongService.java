@@ -46,18 +46,10 @@ public class SongService {
     }
 
     public ArrayList<Song> getSongByGenre(Integer genre_id){
-//        ArrayList<Song> foundSongsByGenre = new ArrayList<>();
-//        Iterable<Song> foundSongs = songRepository.findAll();
-//        foundSongs.forEach(song -> {foundSongsByGenre.add(song);});
-//        return foundSongsByGenre;
         return songRepository.findSongByGenreOrderByTrack_NameAsc(genre_id).orElseThrow();
     }
 
     public ArrayList<Song> getSongByArtist(Integer artist_id){
-//        ArrayList<Song> foundSongsByArtist = new ArrayList<>();
-//        Iterable<Song> foundSongs = songRepository.findAll();
-//        foundSongs.forEach(song -> {foundSongsByArtist.add(song);});
-//        return foundSongsByArtist;
         return songRepository.findSongByArtistOrderByTrack_NameAsc(artist_id).orElseThrow();
     }
 
