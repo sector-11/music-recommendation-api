@@ -25,4 +25,8 @@ public class AlbumService {
     public List<Album> getAllArtists() {
         return albumRepository.findAll();
     }
+
+    public void deleteAlbumById(int id) {
+        albumRepository.deleteById(id);
+    }
 }

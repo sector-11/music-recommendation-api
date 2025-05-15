@@ -26,4 +26,8 @@ public class GenreService {
     public List<Genre> getAllGenres() {
         return genreRepository.findAll();
     }
+
+    public void deleteGenreById(int id) {
+        genreRepository.deleteById(id);
+    }
 }
