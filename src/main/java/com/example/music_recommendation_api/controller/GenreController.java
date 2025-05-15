@@ -1,11 +1,10 @@
 package com.example.music_recommendation_api.controller;
 
 import com.example.music_recommendation_api.model.Genre;
-import com.example.music_recommendation_api.model.Song;
 import com.example.music_recommendation_api.service.GenreService;
-import com.example.music_recommendation_api.service.SongService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +20,11 @@ public class GenreController {
     }
 
 
-
     @GetMapping
-    public List<Genre> getAllGenres() {
-        return genreService.getAllGenres();
+    public ResponseEntity<List<Genre>> getAllGenres() {
+        List<Genre> genreList = genreService.getAllGenres();
+        return genreList.isEmpty()
+                ? new ResponseEntity<>(genreList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(genreList, HttpStatus.OK);
     }
 }

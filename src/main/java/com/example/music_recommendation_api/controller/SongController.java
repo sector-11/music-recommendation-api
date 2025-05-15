@@ -3,6 +3,8 @@ package com.example.music_recommendation_api.controller;
 
 import com.example.music_recommendation_api.model.Song;
 import com.example.music_recommendation_api.service.SongService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,57 +19,78 @@ public class SongController {
         this.songService = songService;
     }
 
+
     @PostMapping
-    public Song addSong(Song song){
-        return songService.addSong(song);
+    public ResponseEntity<Song> addSong(Song song){
+        return new ResponseEntity<>(songService.addSong(song), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Song> getAllSongs() {
-        return songService.getAllSongs();
+    public ResponseEntity<List<Song>> getAllSongs() {
+        List<Song> songList = songService.getAllSongs();
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
-
     @GetMapping("/byid/{song_id}")
-    public Song getSongById(@PathVariable Integer song_id){
-        return songService.getSongById(song_id);
+    public ResponseEntity<Song> getSongById(@PathVariable Integer song_id){
+        return new ResponseEntity<>(songService.getSongById(song_id), HttpStatus.OK);
     }
 
     @GetMapping("/byspotifyid/{spotify_id}")
-    public Song getSongById(@PathVariable String spotify_id){
-        return songService.getSongBySpotifyId(spotify_id);
+    public ResponseEntity<Song> getSongById(@PathVariable String spotify_id){
+        return new ResponseEntity<>(songService.getSongBySpotifyId(spotify_id), HttpStatus.OK);
     }
 
     @GetMapping("/bygenre/{genre_id}")
-    public ArrayList<Song> getSongByGenre(@PathVariable Integer genre_id){
-        return songService.getSongByGenre(genre_id);
+    public ResponseEntity<ArrayList<Song>> getSongByGenre(@PathVariable Integer genre_id){
+        ArrayList<Song> songList = songService.getSongByGenre(genre_id);
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/byartist/{artist_id}")
-    public ArrayList<Song> getSongByArtist(@PathVariable Integer artist_id){
-        return songService.getSongByArtist(artist_id);
+    public ResponseEntity<ArrayList<Song>> getSongByArtist(@PathVariable Integer artist_id){
+        ArrayList<Song> songList = songService.getSongByArtist(artist_id);
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/bydanceability/{minValue},{maxValue}")
-    public ArrayList<Song> getSongByDanceability(@PathVariable Float minValue, @PathVariable Float maxValue){
-        return songService.getSongByDanceability(minValue, maxValue);
+    public ResponseEntity<ArrayList<Song>> getSongByDanceability(@PathVariable Float minValue, @PathVariable Float maxValue){
+        ArrayList<Song> songList = songService.getSongByDanceability(minValue, maxValue);
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/bytempo/{minValue},{maxValue}")
-    public ArrayList<Song> getSongByTempo(@PathVariable Float minValue, @PathVariable Float maxValue){
-        return songService.getSongByTempo(minValue, maxValue);
+    public ResponseEntity<ArrayList<Song>> getSongByTempo(@PathVariable Float minValue, @PathVariable Float maxValue){
+        ArrayList<Song> songList = songService.getSongByTempo(minValue, maxValue);
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/bypopularity")
-    public List<Song> getSongByPopularity(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+    public ResponseEntity<List<Song>> getSongByPopularity(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
                                           @RequestParam(name = "size", defaultValue = "10", required = false) int size){
-        return songService.getSongByPopularity(page, size);
+        List<Song> songList = songService.getSongByPopularity(page, size);
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/recommend/{spotifyID}")
-    public List<Song> getRecommended(@PathVariable(name = "spotifyID") String spotifyId,
+    public ResponseEntity<List<Song>> getRecommended(@PathVariable(name = "spotifyID") String spotifyId,
                                      @RequestParam(name = "page", defaultValue = "0", required = false) int page,
                                      @RequestParam(name = "size", defaultValue = "10", required = false) int size) {
-        return songService.getSimilarSongs(spotifyId, page, size);
+        List<Song> songList = songService.getSimilarSongs(spotifyId, page, size);
+        return songList.isEmpty()
+                ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 }
