@@ -13,10 +13,10 @@ import java.util.List;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String genre;
 
-    @OneToMany(mappedBy = "genre")
+    @OneToMany(mappedBy = "genre", cascade=CascadeType.ALL)
     @JsonIgnore
     List<Song> songs = new ArrayList<>();
 }

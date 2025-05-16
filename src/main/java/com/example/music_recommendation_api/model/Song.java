@@ -13,8 +13,9 @@ import java.util.List;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String spotifyId;
+    @Column(columnDefinition = "VARCHAR(1020)")
     private String track_name;
     private int duration;
     @Column(columnDefinition = "TINYINT")
@@ -25,7 +26,7 @@ public class Song {
     private float danceability;
     private float loudness;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "song_artists",
             joinColumns = @JoinColumn(name = "song_id"),
@@ -33,10 +34,10 @@ public class Song {
     )
     List<Artist> artists = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "songs")
+    @ManyToMany(mappedBy = "songs", cascade=CascadeType.ALL)
     List<Album> albums = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 }

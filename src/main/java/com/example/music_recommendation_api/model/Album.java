@@ -13,10 +13,10 @@ import java.util.List;
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "album_artists",
             joinColumns = @JoinColumn(name = "album_id"),
@@ -25,7 +25,7 @@ public class Album {
     @JsonIgnore
     List<Artist> artists = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
             name = "album_songs",
             joinColumns = @JoinColumn(name = "album_id"),
