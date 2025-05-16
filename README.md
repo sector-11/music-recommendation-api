@@ -34,7 +34,6 @@ The database uses data from [Spotify track dataset by MaharshiPandya on kaggle](
 
 [The frontend](https://github.com/LizzieH97/vibe-match-front-end) consists of the website the user can access.
 
-
 <img src="readme_files/main_page.png" alt="main_page" width="750"/>
 
 On the sidebar, the user is presented with several options of how they would like to find songs:
@@ -65,3 +64,31 @@ In the repositories, the database is called with a set of sorted queries, findin
   - a minimum and maximum danceability range
   - a minimum and maximum tempo range
   - popularity, sorted by most popular
+
+This is a snippet of an SQL query in which a list of songs is returned by a single parameter:
+
+    SELECT songs.* FROM songs, artists, song_artists
+    WHERE song_artists.song_id = songs.id
+    AND song_artists.artist_id = artists.id
+    AND artists.id = :artistId
+
+Where :artistId is a stand in for the parameter.
+
+This is a snippet of an SQL query in which a list of songs is returned by two parameters:
+
+    SELECT DISTINCT songs.* FROM songs, artists, song_artists
+    WHERE song_artists.song_id = songs.id
+    AND song_artists.artist_id = artists.id
+    AND songs.danceability > :min AND songs.danceability < :max
+
+Where :min and :max are stand ins for the parameters.
+
+The queries are additionally sorted by a Sort parameter from the org.springframework.data.domain package.
+
+    findSongByArtistId(Integer artistId, Sort.by("track_name");
+
+This sorts the list by the song names, ascending.
+
+    findSongByPopularity(Sort.by(Sort.Direction.DESC, "popularity");
+
+This sorts the list by the song popularity, descending.
