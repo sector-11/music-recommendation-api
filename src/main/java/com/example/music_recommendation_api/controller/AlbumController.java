@@ -20,8 +20,9 @@ public class AlbumController {
 
 
     @GetMapping
-    public ResponseEntity<List<Album>> getAllAlbums() {
-        List<Album> albumList = albumService.getAllAlbums();
+    public ResponseEntity<List<Album>> getAllAlbums(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                    @RequestParam(name = "size", defaultValue = "50", required = false) int size) {
+        List<Album> albumList = albumService.getAllAlbums(page, size);
         return albumList.isEmpty()
                 ? new ResponseEntity<>(albumList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(albumList, HttpStatus.OK);

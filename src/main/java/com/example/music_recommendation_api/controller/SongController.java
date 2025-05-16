@@ -22,8 +22,9 @@ public class SongController {
 
 
     @GetMapping
-    public ResponseEntity<List<Song>> getAllSongs() {
-        List<Song> songList = songService.getAllSongs();
+    public ResponseEntity<List<Song>> getAllSongs(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                  @RequestParam(name = "size", defaultValue = "50", required = false) int size) {
+        List<Song> songList = songService.getSongsPaginated(page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(songList, HttpStatus.OK);
@@ -40,32 +41,40 @@ public class SongController {
     }
 
     @GetMapping("/bygenre/{genre_id}")
-    public ResponseEntity<ArrayList<Song>> getSongByGenre(@PathVariable Integer genre_id){
-        ArrayList<Song> songList = songService.getSongByGenre(genre_id);
+    public ResponseEntity<ArrayList<Song>> getSongByGenre(@PathVariable Integer genre_id,
+                                                          @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                          @RequestParam(name = "size", defaultValue = "50", required = false) int size){
+        ArrayList<Song> songList = songService.getSongByGenre(genre_id, page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/byartist/{artist_id}")
-    public ResponseEntity<ArrayList<Song>> getSongByArtist(@PathVariable Integer artist_id){
-        ArrayList<Song> songList = songService.getSongByArtist(artist_id);
+    public ResponseEntity<ArrayList<Song>> getSongByArtist(@PathVariable Integer artist_id,
+                                                           @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                           @RequestParam(name = "size", defaultValue = "50", required = false) int size){
+        ArrayList<Song> songList = songService.getSongByArtist(artist_id, page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/bydanceability/{minValue},{maxValue}")
-    public ResponseEntity<ArrayList<Song>> getSongByDanceability(@PathVariable Float minValue, @PathVariable Float maxValue){
-        ArrayList<Song> songList = songService.getSongByDanceability(minValue, maxValue);
+    public ResponseEntity<ArrayList<Song>> getSongByDanceability(@PathVariable Float minValue, @PathVariable Float maxValue,
+                                                                 @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                                 @RequestParam(name = "size", defaultValue = "50", required = false) int size){
+        ArrayList<Song> songList = songService.getSongByDanceability(minValue, maxValue, page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(songList, HttpStatus.OK);
     }
 
     @GetMapping("/bytempo/{minValue},{maxValue}")
-    public ResponseEntity<ArrayList<Song>> getSongByTempo(@PathVariable Float minValue, @PathVariable Float maxValue){
-        ArrayList<Song> songList = songService.getSongByTempo(minValue, maxValue);
+    public ResponseEntity<ArrayList<Song>> getSongByTempo(@PathVariable Float minValue, @PathVariable Float maxValue,
+                                                          @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                          @RequestParam(name = "size", defaultValue = "50", required = false) int size){
+        ArrayList<Song> songList = songService.getSongByTempo(minValue, maxValue, page, size);
         return songList.isEmpty()
                 ? new ResponseEntity<>(songList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(songList, HttpStatus.OK);

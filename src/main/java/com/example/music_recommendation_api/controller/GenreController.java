@@ -20,8 +20,9 @@ public class GenreController {
 
 
     @GetMapping
-    public ResponseEntity<List<Genre>> getAllGenres() {
-        List<Genre> genreList = genreService.getAllGenres();
+    public ResponseEntity<List<Genre>> getAllGenres(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                    @RequestParam(name = "size", defaultValue = "50", required = false) int size) {
+        List<Genre> genreList = genreService.getAllGenres(page, size);
         return genreList.isEmpty()
                 ? new ResponseEntity<>(genreList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(genreList, HttpStatus.OK);

@@ -20,8 +20,9 @@ public class ArtistController {
 
 
     @GetMapping
-    public ResponseEntity<List<Artist>> getAllArtists() {
-        List<Artist> artistList = artistService.getAllArtists();
+    public ResponseEntity<List<Artist>> getAllArtists(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                      @RequestParam(name = "size", defaultValue = "50", required = false) int size) {
+        List<Artist> artistList = artistService.getAllArtists(page, size);
         return artistList.isEmpty()
                 ? new ResponseEntity<>(artistList, HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(artistList, HttpStatus.OK);

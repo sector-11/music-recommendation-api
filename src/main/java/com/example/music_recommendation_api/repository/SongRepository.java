@@ -16,13 +16,13 @@ import java.util.Optional;
 public interface SongRepository extends JpaRepository<Song, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM songs WHERE genre_id = :genreId")
-    Optional<ArrayList<Song>> findSongByGenre(@Param("genreId") Integer genreId, Sort sort);
+    Optional<ArrayList<Song>> findSongByGenre(@Param("genreId") Integer genreId, PageRequest pageRequest);
 
     @Query(nativeQuery = true, value = "SELECT songs.* FROM songs, artists, song_artists " +
             "WHERE song_artists.song_id = songs.id " +
             "AND song_artists.artist_id = artists.id " +
             "AND artists.id = :artistId ")
-    Optional<ArrayList<Song>> findSongByArtist(@Param("artistId") Integer artist_id, Sort sort);
+    Optional<ArrayList<Song>> findSongByArtist(@Param("artistId") Integer artist_id, PageRequest pageRequest);
 
     @Query(nativeQuery = true, value = "SELECT DISTINCT songs.* FROM songs, artists, song_artists " +
             "WHERE song_artists.song_id = songs.id " +
@@ -30,7 +30,7 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
             "AND songs.danceability > :min AND songs.danceability < :max")
     Optional<ArrayList<Song>> findSongByDanceability(@Param("min") float minValue,
                                                      @Param("max") float maxValue,
-                                                                           Sort sort);
+                                                     PageRequest pageRequest);
 
     @Query(nativeQuery = true, value = "SELECT DISTINCT songs.* FROM songs, artists, song_artists " +
             "WHERE song_artists.song_id = songs.id " +
@@ -38,7 +38,7 @@ public interface SongRepository extends JpaRepository<Song, Integer> {
             "AND songs.tempo > :min AND songs.tempo < :max")
     Optional<ArrayList<Song>> findSongByTempo(@Param("min") float minValue,
                                               @Param("max") float maxValue,
-                                                             Sort sort);
+                                                             PageRequest pageRequest);
     Optional<Song> findSongBySpotifyId(String spotifyId);
 
     Optional<ArrayList<Song>> findByDanceabilityBetweenAndTempoBetweenAndGenreOrderByPopularityDesc(float danceabilityMin, float danceabilityMax, float tempoMin, float tempoMax, Genre genre, PageRequest pageRequest);

@@ -60,31 +60,31 @@ public class SongService {
         return songRepository.findSongBySpotifyId(spotifyId).orElseThrow();
     }
 
-    public ArrayList<Song> getSongByGenre(Integer genre_id){
-        ArrayList<Song> songList = songRepository.findSongByGenre(genre_id, Sort.by("track_name")).orElseThrow();
+    public ArrayList<Song> getSongByGenre(Integer genre_id, int page, int size){
+        ArrayList<Song> songList = songRepository.findSongByGenre(genre_id, PageRequest.of(page, size, Sort.by("track_name"))).orElseThrow();
         setSongsArtists(songList);
         setSongsAlbums(songList);
         return songList;
     }
 
-    public ArrayList<Song> getSongByArtist(Integer artist_id){
-        ArrayList<Song> songList = songRepository.findSongByArtist(artist_id, Sort.by("track_name")).orElseThrow();
+    public ArrayList<Song> getSongByArtist(Integer artist_id, int page, int size){
+        ArrayList<Song> songList = songRepository.findSongByArtist(artist_id, PageRequest.of(page, size, Sort.by("track_name"))).orElseThrow();
         setSongsArtists(songList);
         setSongsAlbums(songList);
         return songList;
     }
 
-    public ArrayList<Song> getSongByDanceability(float minValue, float maxValue){
+    public ArrayList<Song> getSongByDanceability(float minValue, float maxValue, int page, int size){
         ArrayList<Song> songList = songRepository.findSongByDanceability(
-                minValue, maxValue, Sort.by("danceability")).orElseThrow();
+                minValue, maxValue, PageRequest.of(page, size, Sort.by("danceability"))).orElseThrow();
         setSongsArtists(songList);
         setSongsAlbums(songList);
         return songList;
     }
 
-    public ArrayList<Song> getSongByTempo(float minValue, float maxValue){
+    public ArrayList<Song> getSongByTempo(float minValue, float maxValue, int page, int size){
         ArrayList<Song> songList = songRepository.findSongByTempo(
-                minValue, maxValue, Sort.by("tempo")).orElseThrow();
+                minValue, maxValue, PageRequest.of(page, size, Sort.by("tempo"))).orElseThrow();
         setSongsArtists(songList);
         setSongsAlbums(songList);
         return songList;
