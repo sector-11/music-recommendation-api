@@ -49,6 +49,16 @@ For the other choices, the page will change to present the user with certain ran
 Alternatively on the main page, the user can input a Spotify id into the search bar, and receive back a list of songs with a similar 'vibe'.
 This consists of looking at the song's attribute values, and presenting a list of songs that fall into a close range.
 
+The site uses API calls to fetch song data per request, using the endpoints specified in the backend to access the data in JSON format.
+
+    export async function fetchAllSongs(): Promise<Song[]> {
+        const res = await fetch("http://localhost:8080/api/songs");
+        if (!res.ok) throw new Error("Failed to fetch songs");
+        return res.json() as Promise<Song[]>;
+    }
+
+This fetches all the songs in the database.
+
 ---
 
 ## Backend
