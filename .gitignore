@@ -35,3 +35,4 @@ build/
 ### Application ###
 src/main/java/com/example/music_recommendation_api/secrets
 src/main/resources/data.csv
+src/main/resources/application-local.properties
