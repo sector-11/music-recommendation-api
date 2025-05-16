@@ -44,7 +44,7 @@ On the sidebar, the user is presented with several options of how they would lik
 
 For genre, a list of genres present in the database will be fetched and displayed in a set of buttons.
 
-For the other choices, page will change to present the user with certain ranges of their chosen attribute. The page will then give the user a list of songs between the chosen range.
+For the other choices, the page will change to present the user with certain ranges of their chosen attribute. The page will then give the user a list of songs between the chosen range.
 
 Alternatively on the main page, the user can input a Spotify id into the search bar, and receive back a list of songs with a similar 'vibe'.
 This consists of looking at the song's attribute values, and presenting a list of songs that fall into a close range.
@@ -84,11 +84,12 @@ This is a snippet of an SQL query in which a list of songs is returned by two pa
 Where :min and :max are stand ins for the parameters.
 
 The queries are additionally sorted by a Sort parameter from the org.springframework.data.domain package.
+This code is used in the SongService:
 
-    findSongByArtistId(Integer artistId, Sort.by("track_name");
+    songRepository.findSongByArtist(artist_id, Sort.by("track_name")
 
 This sorts the list by the song names, ascending.
 
-    findSongByPopularity(Sort.by(Sort.Direction.DESC, "popularity");
+    songRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "popularity"))
 
 This sorts the list by the song popularity, descending.
