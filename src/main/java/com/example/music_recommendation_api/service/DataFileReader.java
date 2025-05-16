@@ -8,9 +8,7 @@ import com.example.music_recommendation_api.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class DataFileReader {
-    private final String FILEPATH = "src/main/resources/testdata.csv";
+    private final String FILENAME = "testdata.csv";
     private final Pattern regex;
     private BufferedReader reader;
     private final Map<String, Artist> artists = new HashMap<>();
@@ -40,7 +38,11 @@ public class DataFileReader {
         String line = "";
 
         try {
-            reader = new BufferedReader(new FileReader(FILEPATH));
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream is = classloader.getResourceAsStream(FILENAME);
+            assert is != null;
+            InputStreamReader isr = new InputStreamReader(is);
+            reader = new BufferedReader(isr);
             reader.readLine(); //skip first line
 
             while ((line = reader.readLine()) != null) {
