@@ -25,21 +25,10 @@ public class DataFileReader {
     private final Map<String, Artist> artists = new HashMap<>();
     private final Map<String, Album> albums = new HashMap<>();
     private final Map<String, Genre> genres = new HashMap<>();
-    private final List<String> uniqueSongs = new ArrayList<>();
-
-    @Autowired
-    private final AlbumRepository albumRepository;
-    @Autowired
-    private final ArtistRepository artistRepository;
-    @Autowired
-    private final GenreRepository genreRepository;
-    @Autowired
+    private final List<String> uniqueSongs = new ArrayList<>();    @Autowired
     private final SongRepository songRepository;
 
-    public DataFileReader(AlbumRepository albumRepository, ArtistRepository artistRepository, GenreRepository genreRepository, SongRepository songRepository) {
-        this.albumRepository = albumRepository;
-        this.artistRepository = artistRepository;
-        this.genreRepository = genreRepository;
+    public DataFileReader(SongRepository songRepository) {
         this.songRepository = songRepository;
         this.regex = Pattern.compile(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
         this.reader = null;
@@ -115,11 +104,7 @@ public class DataFileReader {
     }
 
     public void parseAll(List<FileRow> rows) {
-        List<Album> completeAlbums = new ArrayList<>();
-        List<Artist> completeArtists = new ArrayList<>();
-        List<Genre> completeGenres = new ArrayList<>();
         List<Song> completeSongs = new ArrayList<>();
-        List<Song> incompleteSongs = new ArrayList<>();
 
         for (FileRow row : rows) {
             Song song = this.parseSong(row);
@@ -131,9 +116,6 @@ public class DataFileReader {
                 uniqueSongs.add(songString);
             }
 
-            incompleteSongs.add(song);
-            song = copySong(song);
-
             String[] songArtists = row.getArtists().split(";");
 
             if(!albums.containsKey(row.getAlbumName())) {
@@ -141,7 +123,7 @@ public class DataFileReader {
                 albums.get(row.getAlbumName()).setName(row.getAlbumName());
             }
 
-            Album album = this.copyAlbum(albums.get(row.getAlbumName()));
+            Album album = albums.get(row.getAlbumName());
 
             album.getSongs().add(song);
             song.getAlbums().add(album);
@@ -152,11 +134,10 @@ public class DataFileReader {
                     artists.get(artistName).setName(artistName);
                 }
 
-                Artist artist = copyArtist(artists.get(artistName));
+                Artist artist = artists.get(artistName);
                 artist.getSongs().add(song);
                 song.getArtists().add(artist);
                 album.getArtists().add(artist);
-                completeArtists.add(artist);
             }
 
             if(!genres.containsKey(row.getTrackGenre())) {
@@ -164,27 +145,17 @@ public class DataFileReader {
                 genres.get(row.getTrackGenre()).setGenre(row.getTrackGenre());
             }
 
-            Genre genre = copyGenre(genres.get(row.getTrackGenre()));
+            Genre genre = genres.get(row.getTrackGenre());
             genre.setGenre(row.getTrackGenre());
             genre.getSongs().add(song);
             song.setGenre(genre);
 
             completeSongs.add(song);
-            completeAlbums.add(album);
-            completeGenres.add(genre);
         }
 
         System.out.println("START UPLOAD");
 
-        songRepository.saveAll(incompleteSongs);
-        albumRepository.saveAll(albums.values());
-        artistRepository.saveAll(artists.values());
-        genreRepository.saveAll(genres.values());
-
         songRepository.saveAll(completeSongs);
-        albumRepository.saveAll(completeAlbums);
-        artistRepository.saveAll(completeArtists);
-        genreRepository.saveAll(completeGenres);
 
         System.out.println("UPLOAD COMPLETE");
     }
