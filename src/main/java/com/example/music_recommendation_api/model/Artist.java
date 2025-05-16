@@ -1,9 +1,11 @@
 package com.example.music_recommendation_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Getter @Setter
@@ -11,12 +13,14 @@ import java.util.List;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
 
-    @ManyToMany(mappedBy = "artists")
-    List<Album> albums;
+    @ManyToMany(mappedBy = "artists", cascade=CascadeType.ALL)
+    @JsonIgnore
+    List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "artists")
-    List<Song> songs;
+    @ManyToMany(mappedBy = "artists", cascade=CascadeType.ALL)
+    @JsonIgnore
+    List<Song> songs = new ArrayList<>();
 }
