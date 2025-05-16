@@ -25,4 +25,8 @@ public class ArtistService {
     public List<Artist> getAllArtists() {
         return artistRepository.findAll();
     }
+
+    public void deleteArtistById(int id) {
+        artistRepository.deleteById(id);
+    }
 }

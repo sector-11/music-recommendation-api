@@ -133,4 +133,8 @@ public class SongService {
 
         return songs;
     }
+
+    public void deleteSongById(int id) {
+        songRepository.deleteById(id);
+    }
 }
