@@ -1,6 +1,10 @@
 package com.example.music_recommendation_api.service;
 
 import com.example.music_recommendation_api.model.*;
+import com.example.music_recommendation_api.repository.AlbumRepository;
+import com.example.music_recommendation_api.repository.ArtistRepository;
+import com.example.music_recommendation_api.repository.GenreRepository;
+import com.example.music_recommendation_api.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,21 +25,22 @@ public class DataFileReader {
     private final Map<String, Artist> artists = new HashMap<>();
     private final Map<String, Album> albums = new HashMap<>();
     private final Map<String, Genre> genres = new HashMap<>();
+    private final List<String> uniqueSongs = new ArrayList<>();
 
     @Autowired
-    private final AlbumService albumService;
+    private final AlbumRepository albumRepository;
     @Autowired
-    private final ArtistService artistService;
+    private final ArtistRepository artistRepository;
     @Autowired
-    private final GenreService genreService;
+    private final GenreRepository genreRepository;
     @Autowired
-    private final SongService songService;
+    private final SongRepository songRepository;
 
-    public DataFileReader(AlbumService albumService, ArtistService artistService, GenreService genreService, SongService songService) {
-        this.albumService = albumService;
-        this.artistService = artistService;
-        this.genreService = genreService;
-        this.songService = songService;
+    public DataFileReader(AlbumRepository albumRepository, ArtistRepository artistRepository, GenreRepository genreRepository, SongRepository songRepository) {
+        this.albumRepository = albumRepository;
+        this.artistRepository = artistRepository;
+        this.genreRepository = genreRepository;
+        this.songRepository = songRepository;
         this.regex = Pattern.compile(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
         this.reader = null;
     }
@@ -110,45 +115,121 @@ public class DataFileReader {
     }
 
     public void parseAll(List<FileRow> rows) {
+        List<Album> completeAlbums = new ArrayList<>();
+        List<Artist> completeArtists = new ArrayList<>();
+        List<Genre> completeGenres = new ArrayList<>();
+        List<Song> completeSongs = new ArrayList<>();
+        List<Song> incompleteSongs = new ArrayList<>();
+
         for (FileRow row : rows) {
-            Song song = songService.addSong(this.parseSong(row));
+            Song song = this.parseSong(row);
+            String songString = song.getTrack_name() + " by " + song.getArtists();
+
+            if (uniqueSongs.contains(songString)) {
+                continue;
+            } else {
+                uniqueSongs.add(songString);
+            }
+
+            incompleteSongs.add(song);
+            song = copySong(song);
+
             String[] songArtists = row.getArtists().split(";");
 
             if(!albums.containsKey(row.getAlbumName())) {
-                albums.put(row.getAlbumName(), albumService.addAlbum(new Album()));
+                albums.put(row.getAlbumName(), new Album());
                 albums.get(row.getAlbumName()).setName(row.getAlbumName());
             }
 
-            Album album = albums.get(row.getAlbumName());
+            Album album = this.copyAlbum(albums.get(row.getAlbumName()));
+
             album.getSongs().add(song);
             song.getAlbums().add(album);
 
             for (String artistName : songArtists) {
                 if (!artists.containsKey(artistName)) {
-                    artists.put(artistName, artistService.addArtist(new Artist()));
+                    artists.put(artistName, new Artist());
                     artists.get(artistName).setName(artistName);
                 }
 
-                Artist artist = artists.get(artistName);
+                Artist artist = copyArtist(artists.get(artistName));
                 artist.getSongs().add(song);
                 song.getArtists().add(artist);
                 album.getArtists().add(artist);
-                artistService.addArtist(artist);
+                completeArtists.add(artist);
             }
 
             if(!genres.containsKey(row.getTrackGenre())) {
-                genres.put(row.getTrackGenre(), genreService.addGenre(new Genre()));
+                genres.put(row.getTrackGenre(), new Genre());
                 genres.get(row.getTrackGenre()).setGenre(row.getTrackGenre());
             }
 
-            Genre genre = genres.get(row.getTrackGenre());
+            Genre genre = copyGenre(genres.get(row.getTrackGenre()));
             genre.setGenre(row.getTrackGenre());
             genre.getSongs().add(song);
             song.setGenre(genre);
 
-            songService.addSong(song);
-            albumService.addAlbum(album);
-            genreService.addGenre(genre);
+            completeSongs.add(song);
+            completeAlbums.add(album);
+            completeGenres.add(genre);
         }
+
+        System.out.println("START UPLOAD");
+
+        songRepository.saveAll(incompleteSongs);
+        albumRepository.saveAll(albums.values());
+        artistRepository.saveAll(artists.values());
+        genreRepository.saveAll(genres.values());
+
+        songRepository.saveAll(completeSongs);
+        albumRepository.saveAll(completeAlbums);
+        artistRepository.saveAll(completeArtists);
+        genreRepository.saveAll(completeGenres);
+
+        System.out.println("UPLOAD COMPLETE");
+    }
+
+    private Album copyAlbum(Album in) {
+        Album out = new Album();
+        out.setName(in.getName());
+        out.setId(in.getId());
+        out.setArtists(new ArrayList<>());
+        out.setSongs(new ArrayList<>());
+        return out;
+    }
+
+    private Artist copyArtist(Artist in) {
+        Artist out = new Artist();
+        out.setName(in.getName());
+        out.setId(in.getId());
+        out.setAlbums(new ArrayList<>());
+        out.setSongs(new ArrayList<>());
+        return out;
+    }
+
+    private Genre copyGenre(Genre in) {
+        Genre out = new Genre();
+        out.setGenre(in.getGenre());
+        out.setId(in.getId());
+        out.setSongs(new ArrayList<>());
+        return out;
+    }
+
+    private Song copySong(Song in) {
+        Song out = new Song();
+        out.setId(in.getId());
+        out.setSpotifyId(in.getSpotifyId());
+        out.setTrack_name(in.getTrack_name());
+        out.setDuration(in.getDuration());
+        out.setExplicit(in.isExplicit());
+        out.setPopularity(in.getPopularity());
+        out.setTempo(in.getTempo());
+        out.setEnergy(in.getEnergy());
+        out.setDanceability(in.getDanceability());
+        out.setLoudness(in.getLoudness());
+        out.setArtists(new ArrayList<>());
+        out.setAlbums(new ArrayList<>());
+        out.setGenre(in.getGenre());
+        return out;
     }
 }

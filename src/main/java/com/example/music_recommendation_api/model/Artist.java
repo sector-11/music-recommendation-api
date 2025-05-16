@@ -13,14 +13,14 @@ import java.util.List;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
 
-    @ManyToMany(mappedBy = "artists")
+    @ManyToMany(mappedBy = "artists", cascade=CascadeType.ALL)
     @JsonIgnore
     List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "artists")
+    @ManyToMany(mappedBy = "artists", cascade=CascadeType.ALL)
     @JsonIgnore
     List<Song> songs = new ArrayList<>();
 }
