@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>music-recommendation-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-RELEASE</version>
 	<name>Music Recommendation API</name>
 	<description>Backend for final project with _nology</description>
 	<url/>
