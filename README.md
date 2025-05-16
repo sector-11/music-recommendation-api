@@ -24,7 +24,8 @@ The database consists of 4 main tables: songs, artists, albums and genres. For t
 
 ![API Entity Relationship Diagram](readme_files/API-ERD.png "ERD")
 
-The database uses data from [Spotify track dataset by MaharshiPandya on kaggle](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset)
+The database and the file `src/main/resources/testdata.csv` contain information from Spotify Tracks Dataset, which is made available
+[here](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/1-0/). The text of this license can also be found at `src/main/resources/odbl-10.txt`.
 
 ---
 
@@ -63,7 +64,41 @@ This fetches all the songs in the database.
 
 ## Backend
 
-### Java / Spring Boot
+### Installation Guide
+
+-   Ensure you have Java 21 installed. (Developed with Amazon Corretto 21.0.6)
+-   Clone [this](https://github.com/sector-11/music-recommendation-api.git) repository.
+-   Create an application-rds.properties file which points to your MySQL repository, or use the default in-memory database (NOT RECOMMENDED)
+-   Create a 'secrets' package and 'Secrets' class, which contains a String field called "admin" and a 'getAdmin()' method - Note that this string is the password for authorizing the use of potentially destructive endpoints
+-   Run mvn package to build the program
+-   Run program with `java -jar <OUTPUT FROM MVN>`
+-   Close program with `CTRL + C`
+
+### Endpoints
+
+Valid types are "artists", "albums", "genres", "songs"
+Available on all types:
+
+| Method | Endpoint         | Action                                                 | Notes                                                                                                                          |
+| ------ | ---------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | /api/<TYPE>      | Retrieves all entries of given type from the database  | Results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the top 10               |
+| POST   | /api/<TYPE>      | Posts a given entry to the database                    | Requires relevant object in body of request and the 'auth' parameter to be set to the APIs password for request to be accepted |
+| GET    | /api/<TYPE>/{id} | Retrieves an entry with the given id from the database |                                                                                                                                |
+| DELETE | /api/<TYPE>/{id} | Deletes an entry with the given id from the database   | Requires 'auth' parameter to be set to the APIs password for request to be accepted                                            |
+
+Available only for songs:
+
+| Method | Endpoint                                          | Action                                                                               | Notes                                                                                                                                                                                   |
+| ------ | ------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | /api/songs/byid/{song_id}                         | Retrieves song with given id in database                                             |                                                                                                                                                                                         |
+| GET    | /api/songs/byspotifyid/{spotify_id}               | Retrieves song with the given Spotify id from the database                           |                                                                                                                                                                                         |
+| GET    | /api/songs/bygenre/{genre_id}                     | Retrieves all songs with genres matching the given id                                | Results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the first 50 sorted by track name                                                 |
+| GET    | /api/songs/byartist/{artist_id}                   | Retrieves all songs with artist matching the given id                                | Results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the first 50 sorted by track name                                                 |
+| GET    | /api/songs/bydanceability/{min_value},{max_value} | Retrieves all songs with danceability values in the given range                      | "Danceability" values were assigned by Spotify and in used dataset and results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the top 50 |
+| GET    | /api/songs/bytempo/{min_value},{max_value}        | Retrieves all songs with tempo in the given range                                    | Results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the top 50                                                                        |
+| GET    | /api/songs/bypopularity                           | Retrieves a list of the most popular songs                                           | Results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the top 10                                                                        |
+| GET    | /api/songs/recommend/{spotify_id}                 | Retrieves a list of songs which are similar to the one matching the given Spotify id | Results are paginated and can be moved through with the 'page' and 'size' parameters. By default gets the first 10, if results are available.                                           |
+
 
 
 ### SQL
